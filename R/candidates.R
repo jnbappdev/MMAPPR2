@@ -96,14 +96,35 @@ generateCandidates <- function(md) {
 }
 
 .getVariantsForRange <- function(inputRange, param) {
-  # merge files in desired region if there are multiple
   mergedBam <- file.path(outputFolder(param), "merged.tmp.bam")
+
+  # choose the BAM (BamFile if single; character path if merged)
   if (length(param@mutFiles) < 2) {
-    mutBam <- param@mutFiles[[1]]
+    mutBam <- param@mutFiles[[1]]  # BamFile
   } else {
-    mutBam <- Rsamtools::mergeBam(param@mutFiles, destination = mergedBam, region = inputRange)
+    mutBam <- Rsamtools::mergeBam(param@mutFiles, destination = mergedBam, region = inputRange) 
   }
-  Rsamtools::indexBam(mutBam)
+
+  # index whatever we have
+  if (inherits(mutBam, "BamFile")) {
+    p <- BiocGenerics::path(mutBam)
+    if (!file.exists(paste0(p, ".bai"))) Rsamtools::indexBam(p)
+
+  } else if (is.character(mutBam)) {
+    if (!file.exists(paste0(mutBam, ".bai"))) Rsamtools::indexBam(mutBam)
+  } else {
+    stop("mutBam must be a BamFile or a character path; got: ", class(mutBam)[1])
+  }
+
+  # always hand downstream a BamFileList
+  mutBamList <- if (inherits(mutBam, "BamFile")) {
+    Rsamtools::BamFileList(mutBam)
+  } else {
+    Rsamtools::BamFileList(Rsamtools::BamFile(mutBam))
+  }
+
+  # (optional) keep old name if later code expects `mutBam`
+  mutBam <- mutBamList
   
   # FASTA seqinfo & a single canonical style
   fa     <- param@refGenome                     # Rsamtools::FaFile
