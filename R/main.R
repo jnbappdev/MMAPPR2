@@ -50,7 +50,7 @@ NULL
 mmappr <- function(mmapprParam) {
     startTime <- Sys.time()
     message("[/][/][/][/][/][/][/][/][/][/][/][/][/][/][/]")
-    message("[\][\][\][\] Welcome to MMAPPR2! [\][\][\][\]")
+    message("[\\][\\][\\][\\] Welcome to MMAPPR2! [\\][\\][\\][\\]")
     message("[/][/][/][/][/][/][/][/][/][/][/][/][/][/][/]\n")
 
     .checkDep('samtools')
