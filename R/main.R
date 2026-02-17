@@ -49,9 +49,9 @@ NULL
 
 mmappr <- function(mmapprParam) {
     startTime <- Sys.time()
-    message("------------------------------------")
-    message("-------- Welcome to MMAPPR2 --------")
-    message("------------------------------------\n")
+    message("[/][/][/][/][/][/][/][/][/][/][/][/][/][/][/]")
+    message("[\][\][\][\] Welcome to MMAPPR2! [\][\][\][\]")
+    message("[/][/][/][/][/][/][/][/][/][/][/][/][/][/][/]\n")
 
     .checkDep('samtools')
 
@@ -103,9 +103,6 @@ mmappr <- function(mmapprParam) {
         
         return(md)
     }
-
-}
-
 
 .messageAndLog <- function(msg, outputFolder) {
     logFile <- file.path(outputFolder, 'mmappr2.log')
