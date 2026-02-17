@@ -92,13 +92,18 @@ mmappr <- function(mmapprParam) {
     })
 
     endTime <- Sys.time()
-    .messageAndLog(paste('\nEnd time:', endTime), oF)
-    .messageAndLog(paste("MMAPPR2 runtime:", format(endTime - startTime)), oF)
-    saveRDS(md, file.path(md@param@outputFolder, "mmappr_data.RDS"))
-    .log('\nsessionInfo()', oF)
-    .log(sessionInfo(), oF)
+        .messageAndLog(paste('\nEnd time:', endTime), oF)
+        .messageAndLog(paste("MMAPPR2 runtime:", format(endTime - startTime)), oF)
+        saveRDS(md, file.path(md@param@outputFolder, "mmappr_data.RDS"))
+        .log('\nsessionInfo()', oF)
+        .log(sessionInfo(), oF)
+        
+        # Automatically reorder the log
+        .reorderLogFile(oF)
+        
+        return(md)
+    }
 
-    return(md)
 }
 
 
