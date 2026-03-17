@@ -49,6 +49,7 @@ NULL
 
 mmappr <- function(mmapprParam) {
     startTime <- Sys.time()
+    message("\n")
     message("[/][/][/][/][/][/][/][/][/][/][/][/][/][/][/]")
     message("[\\][\\][\\][\\] Welcome to MMAPPR2! [\\][\\][\\][\\]")
     message("[/][/][/][/][/][/][/][/][/][/][/][/][/][/][/]\n")
